@@ -4,6 +4,7 @@ import useAuthor from "../../../hooks/useAuthor.js";
 import {useState} from "react";
 import AddAuthorDialog from "../../components/a/AddAuthorDialog/AddAuthorDialog.jsx";
 import "../../pages/Authors/AuthorsPage.css"
+import AuthorsPerCountry from "../../components/a/AuhtorsPerCountry/AuthorsPerCountry.jsx";
 const AuthorsPage=()=>{
     const {authors, loading,onEdit,onAdd,onDelete}=useAuthor();
     const [addAuthorDialog, setAddAuthorDialog]=useState(false);
@@ -23,6 +24,11 @@ const AuthorsPage=()=>{
                                 Add Author
                             </Button>
                         </Box>
+
+                        <Box sx={{ mb: 3 }}>
+                            <AuthorsPerCountry /> {/* Вметнување на графикот */}
+                        </Box>
+
                         <Authors authors={authors} onEdit={onEdit} onDelete={onDelete}/>
                     </>
                 }

@@ -14,7 +14,12 @@ const authorRepository={
     //deleting book
     delete:async(id)=>{
         return await axiosInstance.delete(`/authors/delete/${id}`);
+    },
+
+    fetchAuthorsPerCountry:async ()=>{
+        return await axiosInstance.get("/authors/by-country");
     }
+
 }
 
 export default authorRepository;

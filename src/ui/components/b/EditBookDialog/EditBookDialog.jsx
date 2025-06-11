@@ -11,13 +11,26 @@ import {
     TextField
 } from "@mui/material";
 
+
 const EditBookDialog = ({open, onClose, book, onEdit }) => {
+
     const [formData, setFormData] = useState({
         "name": book.name,
+        "avaliableCopies": book.avaliableCopies,
         "author": book.author,
         "category": book.category,
-        "avaliableCopies": book.avaliableCopies,
+
     });
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+        setFormData({...formData, [name]: value});
+    };
+
+    const handleSubmit = () => {
+        onEdit(book.id, formData);
+        setFormData(formData);
+        onClose();
+    };
 
     const { authors = [], loading } = useAuthor();
     const categories = [
@@ -29,16 +42,7 @@ const EditBookDialog = ({open, onClose, book, onEdit }) => {
         "CLASSICS",
         "DRAMA"
     ];
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
-    };
 
-    const handleSubmit = () => {
-        onEdit(book.id, formData);
-        setFormData(formData);
-        onClose();
-    };
 
     return (
         <Dialog open={open} onClose={onClose}>
@@ -50,6 +54,7 @@ const EditBookDialog = ({open, onClose, book, onEdit }) => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
+
                     fullWidth
                 />
                 <TextField
@@ -59,6 +64,7 @@ const EditBookDialog = ({open, onClose, book, onEdit }) => {
                     type="number"
                     value={formData.avaliableCopies}
                     onChange={handleChange}
+
                     fullWidth
                 />
                 <FormControl fullWidth margin="dense">
@@ -67,6 +73,7 @@ const EditBookDialog = ({open, onClose, book, onEdit }) => {
                         name="category"
                         value={formData.category}
                         onChange={handleChange}
+
                         label="Category"
                         variant="outlined"
                     >
@@ -83,6 +90,7 @@ const EditBookDialog = ({open, onClose, book, onEdit }) => {
                         name="author"
                         value={formData.author}
                         onChange={handleChange}
+
                         label="Author"
                         variant="outlined"
                     >

@@ -2,10 +2,6 @@ import React from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 const DeleteBookDialog = ({open, onClose, book, onDelete}) => {
 
-    const handleSubmit = () => {
-        onDelete(book.id);
-        onClose();
-    };
 
     return (
         <Dialog open={open} onClose={onClose}>
@@ -16,7 +12,7 @@ const DeleteBookDialog = ({open, onClose, book, onDelete}) => {
                 </DialogContentText>
                 <DialogActions>
                     <Button onClick={onClose}>Cancel</Button>
-                    <Button onClick={handleSubmit} color="error" variant="contained">Delete</Button>
+                    <Button  color="error" variant="contained">Delete</Button>
                 </DialogActions>
             </DialogContent>
         </Dialog>

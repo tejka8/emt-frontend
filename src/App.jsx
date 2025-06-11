@@ -5,6 +5,7 @@ import CountryPage from './ui/pages/Countries/CountryPage.jsx';
 import Layout from './ui/components/layout/Layout/Lyout.jsx';
 import HomePage from './ui/pages/Home/HomePage.jsx';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import BookDetails from "./ui/components/b/BookDetails/BookDetails.jsx";
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<HomePage />} />
                     <Route path="books" element={<BooksPage />} />
+                    <Route path="books/:id" element={<BookDetails/>}/>
                     <Route path="authors" element={<AuthorsPage />} />
                     <Route path="countries" element={<CountryPage />} />
                 </Route>

@@ -13,16 +13,26 @@ import useAuthor from "../../../../hooks/useAuthor.js";
 
 const initialFormData = {
     "name": "",
-    "price": "",
-    "quantity": "",
-    "categoryId": "",
-    "manufacturerId": "",
+    "avaliableCopies": "",
+    "author": "",
+    "category": "",
 };
-
 
 const AddBookDialog=({open,onClose,onAdd})=>{
     const [formData, setFormData] = useState(initialFormData);
     const { authors = [], loading } = useAuthor();
+
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+        setFormData({...formData, [name]: value});
+    };
+
+    const handleSubmit = () => {
+        onAdd(formData);
+        setFormData(initialFormData);
+        onClose();
+    };
+
     const categories = [
         "NOVEL",
         "THRILLER",
@@ -32,15 +42,7 @@ const AddBookDialog=({open,onClose,onAdd})=>{
         "CLASSICS",
         "DRAMA"
     ];
-    const handleChange = (event)=>{
-        const {name,value}=event.target;
-        setFormData({...formData,[name]:value})
-    }
-    const handleSubmit=()=>{
-        onAdd(formData);
-        setFormData(initialFormData);
-        onClose();
-    }
+
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Add new Book</DialogTitle>
@@ -49,7 +51,7 @@ const AddBookDialog=({open,onClose,onAdd})=>{
                     margin="dense"
                     label="Name"
                     name="name"
-                    value={formData.name}
+                    value={formData.price}
                     onChange={handleChange}
                     fullWidth
                 />
@@ -68,6 +70,7 @@ const AddBookDialog=({open,onClose,onAdd})=>{
                         name="category"
                         value={formData.category}
                         onChange={handleChange}
+
                         label="Category"
                         variant="outlined"
                     >
@@ -84,6 +87,7 @@ const AddBookDialog=({open,onClose,onAdd})=>{
                         name="author"
                         value={formData.author}
                         onChange={handleChange}
+
                         label="Author"
                         variant="outlined"
                     >
@@ -97,7 +101,7 @@ const AddBookDialog=({open,onClose,onAdd})=>{
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Cancel</Button>
-                <Button onClick={handleSubmit} variant="contained" color="warning">Edit</Button>
+                <Button onClick={handleSubmit} variant="contained" color="warning">Add</Button>
             </DialogActions>
         </Dialog>
     );
